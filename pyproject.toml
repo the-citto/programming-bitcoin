@@ -1,0 +1,120 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "programming_bitcoin"
+description = "project description"
+version = "0.1.0"
+
+authors = [
+    {name = "the-citto", email = "my.email@domain.com"}
+]
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.12"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: MIT",
+    "Operating System :: Linux"
+]
+
+dynamic = ["dependencies", "optional-dependencies"]
+
+[project.scripts]
+programming_bitcoin = "programming_bitcoin:__main__.main"
+
+[project.gui-scripts]
+# programming_bitcoinw = "programming_bitcoin:__main__.main"
+
+
+[tool.setuptools]
+package-dir = {"" = "python"}
+
+[tool.setuptools.dynamic]
+dependencies = { file = ["requirements/requirements.txt"] }
+optional-dependencies.tests = { file = ["requirements/requirements-tests.txt"]}
+optional-dependencies.dev = { file = ["requirements/requirements-dev.txt"]}
+
+[tool.setuptools.packages.find]
+where = ["python"]
+
+
+[tool.pytest.ini_options]
+addopts = "--no-header -vv --tb=no --cov"
+testpaths = ["python/tests"]
+
+
+[tool.coverage.run]
+omit = ["python/tests/*"]
+
+
+[tool.pyright]
+# pythonVersion = "3.12"
+venvPath = "."
+venv = ".venv"
+
+include = [
+    "python",
+    "tests",
+]
+exclude = [
+    "__pycache__",
+    ".git",
+    ".venv",
+    "_old",
+    "_tmp",
+]
+
+[tool.mypy]
+# python_version = "3.12"
+python_executable = ".venv/bin/python"
+exclude = [
+    "__pycache__",
+    ".git",
+    ".venv",
+    "_old",
+    "_tmp",
+]
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+ignore_errors = true
+
+
+[tool.ruff]
+# target-version = "py312"
+exclude = [
+    "__pycache__",
+    ".git",
+    ".venv",
+    "_old",
+    "_tmp",
+]
+line-length = 120
+indent-width = 4
+
+[tool.ruff.lint]
+select = [
+    "ALL"
+]
+ignore = [
+    "ERA001", # Found commented-out code
+    # "PLR2044", # Line with empty comment
+    # "TD003", # Missing issue link on the line following this TODO
+]
+
+[tool.ruff.per-file-ignores]
+"tests/**/*.py" = [
+    # "ARG", # Unused function args -> fixtures nevertheless are functionally relevant...
+    # "FBT", # Don't care about booleans as positional arguments in tests, e.g. via @pytest.mark.parametrize()
+    "PLR2004", # Magic value used in comparison
+    "S101",  # Use of `assert` detected
+    # "S311", # Standard pseudo-random generators are not suitable for cryptographic purposes
+]
+
+[tool.ruff.isort]
+known-first-party = ["programming_bitcoin"]
+lines-after-imports = 3
+
+
