@@ -10,8 +10,6 @@ charset-normalizer==3.4.0
     # via requests
 click==8.1.7
     # via -r requirements/requirements.in
-colorama==0.4.6
-    # via click
 idna==3.10
     # via requests
 markdown-it-py==3.0.0

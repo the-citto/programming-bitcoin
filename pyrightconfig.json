@@ -1,0 +1,16 @@
+{
+    "include": [
+        "python",
+        "tests"
+    ],
+    "exclude": [
+        "__pycache__",
+        ".git",
+        ".venv",
+        "_old",
+        "_tmp"
+    ],
+    "venvPath": ".",
+    "venv": ".venv"
+}
+
