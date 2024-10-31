@@ -63,22 +63,22 @@ module = "tests.*"
 ignore_errors = true
 
 
-[tool.pyright]
-# pythonVersion = "3.12"
-venvPath = "."
-venv = ".venv"
-
-include = [
-    "python",
-    "tests",
-]
-exclude = [
-    "__pycache__",
-    ".git",
-    ".venv",
-    "_old",
-    "_tmp",
-]
+# [tool.pyright]
+# # pythonVersion = "3.12"
+# venvPath = "."
+# venv = ".venv"
+#
+# include = [
+#     "python",
+#     "tests",
+# ]
+# exclude = [
+#     "__pycache__",
+#     ".git",
+#     ".venv",
+#     "_old",
+#     "_tmp",
+# ]
 
 
 [tool.ruff]
