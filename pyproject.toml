@@ -50,7 +50,7 @@ omit = ["python/tests/*"]
 
 
 [tool.mypy]
-python_executable = ".venv/Scripts/python.exe"
+# python_executable = ".venv/Scripts/python.exe"
 exclude = [
     "__pycache__",
     ".git",
