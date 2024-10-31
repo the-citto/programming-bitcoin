@@ -48,7 +48,6 @@ testpaths = ["tests"]
 omit = ["python/tests/*"]
 
 
-
 [tool.mypy]
 # python_executable = ".venv/Scripts/python.exe"
 exclude = [
@@ -62,6 +61,24 @@ exclude = [
 [[tool.mypy.overrides]]
 module = "tests.*"
 ignore_errors = true
+
+
+[tool.pyright]
+# pythonVersion = "3.12"
+venvPath = "."
+venv = ".venv"
+
+include = [
+    "python",
+    "tests",
+]
+exclude = [
+    "__pycache__",
+    ".git",
+    ".venv",
+    "_old",
+    "_tmp",
+]
 
 
 [tool.ruff]

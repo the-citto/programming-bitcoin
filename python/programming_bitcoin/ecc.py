@@ -9,6 +9,9 @@ class FieldElement:
 
     def __init__(self, num: int, prime: int) -> None:
         """Init."""
+        # if not isinstance(num, int):
+        #     err_msg = f"{num} is not an integer."
+        #     raise TypeError(err_msg)
         if num >= prime or num < 0:
             error = f"Num {num} not in field range 0 to {prime - 1}"
             raise ValueError(error)
