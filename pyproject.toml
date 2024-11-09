@@ -30,6 +30,9 @@ programming_bitcoin = "programming_bitcoin:__main__.main"
 [tool.setuptools]
 package-dir = {"" = "python"}
 
+[tool.setuptools.package-data]
+programming_bitcoin = ["py.typed"]
+
 [tool.setuptools.dynamic]
 dependencies = { file = ["requirements/requirements.txt"] }
 optional-dependencies.tests = { file = ["requirements/requirements-tests.txt"]}
@@ -45,11 +48,12 @@ testpaths = ["tests"]
 
 
 [tool.coverage.run]
-omit = ["python/tests/*"]
+omit = ["tests/*"]
 
 
 [tool.mypy]
-# python_executable = ".venv/Scripts/python.exe"
+# mypy_path = "/usr/bin/mypy"
+strict = true
 python_executable = ".venv/bin/python"
 exclude = [
     "__pycache__",
@@ -59,31 +63,33 @@ exclude = [
     "_tmp",
 ]
 
-[[tool.mypy.overrides]]
-module = "tests.*"
-ignore_errors = true
+# [[tool.mypy.overrides]]
+# module = "tests.*"
+# ignore_missing_imports = true
+# ignore_errors = true
 
 
-# [tool.pyright]
-# # pythonVersion = "3.12"
-# venvPath = "."
-# venv = ".venv"
-#
-# include = [
-#     "python",
-#     "tests",
-# ]
-# exclude = [
-#     "__pycache__",
-#     ".git",
-#     ".venv",
-#     "_old",
-#     "_tmp",
-# ]
+[tool.pyright]
+venvPath = "."
+venv = ".venv"
+
+# typeCheckingMode = "off"
+enableReachabilityAnalysis = false
+
+include = [
+    "python",
+    "tests",
+]
+exclude = [
+    "__pycache__",
+    ".git",
+    ".venv",
+    "_old",
+    "_tmp",
+]
 
 
 [tool.ruff]
-# target-version = "py312"
 exclude = [
     "__pycache__",
     ".git",

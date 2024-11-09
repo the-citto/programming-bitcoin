@@ -44,6 +44,7 @@ requirements/requirements-tests.txt: requirements/requirements.txt requirements/
 	$(PYTHON) -m piptools compile -o requirements/requirements-tests.txt requirements/requirements-tests.in
 
 tests: requirements/requirements.txt
+	$(PYTHON) -m piptools sync requirements/requirements-tests.txt
 	$(PYTHON) -m pip install -e .[tests]
 
 
@@ -51,6 +52,7 @@ requirements/requirements-dev.txt: requirements/requirements-tests.txt requireme
 	$(PYTHON) -m piptools compile -o requirements/requirements-dev.txt requirements/requirements-dev.in
 
 dev: requirements/requirements-dev.txt
+	$(PYTHON) -m piptools sync requirements/requirements-dev.txt
 	$(PYTHON) -m pip install -e .[dev]
 
 
