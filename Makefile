@@ -33,7 +33,7 @@ all: requirements/requirements-dev.txt
 
 #
 
-requirements/requirements.txt: requirements/requirements.in $(PIP-COMPILE)
+requirements/requirements.txt: pyproject.toml requirements/requirements.in $(PIP-COMPILE)
 	$(PYTHON) -m piptools compile -o requirements/requirements.txt requirements/requirements.in
 
 base: requirements/requirements.txt
@@ -55,6 +55,16 @@ dev: requirements/requirements-dev.txt
 	$(PYTHON) -m piptools sync requirements/requirements-dev.txt
 	$(PYTHON) -m pip install -e .[dev]
 
+
+check:
+	@$(BIN-DIR)/pytest || true
+	@echo
+	@echo ------------------------------   mypy   ------------------------------
+	@$(BIN-DIR)/mypy . || true
+	@echo
+	@echo ------------------------------   ruff   ------------------------------
+	@$(BIN-DIR)/ruff check || true
+	@echo
 
 
 $(PIP-COMPILE):

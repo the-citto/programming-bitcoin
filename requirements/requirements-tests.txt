@@ -4,12 +4,20 @@
 #
 #    pip-compile --output-file=requirements/requirements-tests.txt requirements/requirements-tests.in
 #
+attrs==24.2.0
+    # via pytest-mypy
 coverage[toml]==7.6.4
     # via
     #   -r requirements/requirements-tests.in
     #   pytest-cov
+filelock==3.16.1
+    # via pytest-mypy
 iniconfig==2.0.0
     # via pytest
+mypy==1.13.0
+    # via pytest-mypy
+mypy-extensions==1.0.0
+    # via mypy
 packaging==24.1
     # via pytest
 pluggy==1.5.0
@@ -18,5 +26,17 @@ pytest==8.3.3
     # via
     #   -r requirements/requirements-tests.in
     #   pytest-cov
+    #   pytest-mypy
+    #   pytest-ruff
 pytest-cov==5.0.0
     # via -r requirements/requirements-tests.in
+pytest-mypy==0.10.3
+    # via -r requirements/requirements-tests.in
+pytest-ruff==0.4.1
+    # via -r requirements/requirements-tests.in
+ruff==0.7.3
+    # via pytest-ruff
+typing-extensions==4.12.2
+    # via
+    #   -c /home/alex/Development/python/programming-bitcoin/requirements/requirements.txt
+    #   mypy

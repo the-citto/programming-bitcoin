@@ -2,4 +2,6 @@
 coverage
 pytest
 pytest-cov
+pytest-mypy
+pytest-ruff
 
