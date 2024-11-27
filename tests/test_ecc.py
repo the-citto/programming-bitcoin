@@ -217,3 +217,12 @@ class TestFieldElement:
             assert isinstance(field_1 / field_2, FieldElement)
 
 
+@pytest.mark.point
+class TestPoint:
+    """Test point."""
+
+
+
+
+
+

@@ -12,7 +12,8 @@ authors = [
 ]
 readme = "README.md"
 license = { file = "LICENSE" }
-requires-python = ">=3.12"
+# requires-python = ">=3.12"
+# requires-python = ".python-version"
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: MIT",
@@ -43,9 +44,7 @@ where = ["python"]
 
 
 [tool.pytest.ini_options]
-# addopts = "--no-header -vv --tb=no --cov"
 addopts = "--strict-markers --no-header --tb=no --cov --cov-report term-missing"
-# addopts = "--strict-markers --no-header --tb=no --cov --cov-report term-missing --mypy ."
 testpaths = ["tests"]
 
 

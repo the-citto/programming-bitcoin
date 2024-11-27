@@ -1,15 +1,15 @@
 
-# .PHONY: base
-# .PHONY: dev
-# .PHONY: tests
-# .PHONY: build
+.PHONY: base
+.PHONY: build
+.PHONY: check
+.PHONY: dev
+.PHONY: recipes
+.PHONY: tests
 
 
 
-PYTHON-VERSION := 3.12
+PYTHON-VERSION := $(file < .python-version)
 # OUTDIR := --outdir /path
-
-
 
 ifeq ($(OS),Windows_NT)
 	PYTHON-SYS = py -$(PYTHON-VERSION)
@@ -25,6 +25,7 @@ BIN-DIR:= $(VENV-NAME)/$(BIN-NAME)
 
 PIP-COMPILE:= $(BIN-DIR)/pip-compile$(EXTENSION)
 PYTHON:= $(BIN-DIR)/python$(EXTENSION)
+
 
 
 #
@@ -65,6 +66,9 @@ check:
 	@echo ------------------------------   ruff   ------------------------------
 	@$(BIN-DIR)/ruff check || true
 	@echo
+	@echo -----------------------------   pyright   ----------------------------
+	@$(BIN-DIR)/pyright || true
+	@echo
 
 
 $(PIP-COMPILE):
@@ -77,4 +81,9 @@ build: dev
 	$(PYTHON) -m build $(OUTDIR)
 
 
+
+recipes:
+	@echo 
+	@make -p | grep -v make | grep -v all | grep -E -A1 '^$$' | grep -E '^[a-z-]+:' | sort | awk -F':' '{print $$1}'
+	@echo 
 

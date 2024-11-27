@@ -126,28 +126,26 @@ class Point(pydantic.BaseModel):
 
     @pydantic.model_validator(mode="after")
     def _valid_values(self) -> t.Self:
-        # if self.ev >= self.order:
-        #     err_msg = f"element {self.el} out of field range '0 to {self.order - 1}'"
-        #     raise ValueError(err_msg)
+        if type(self.x) is type(self.y):
+            err_msg = f"Inconsistent point pair ({self.x}, {self.y})"
+        if self.x is None or self.y is None:
+            return self
+        if self.y**2 != self.x**3 + self.a * self.x + self.b:
+            err_msg = f"Point ({self.x}, {self.y}) is not on the curve"
+            raise ValueError(err_msg)
         return self
 
+    def __eq__(self, other: object) -> bool:
+        """Eq."""
+        if not isinstance(other, type(self)):
+            err_msg = f"Type {type(other)} incompatible with {self.__class__.__name__}."
+            raise TypeError(err_msg)
+        return self.x == other.x and self.y == other.y and self.a == other.a and self.b == other.b
 
-    #     if self.x is None and self.y is None:
-    #         return
-    #     if self.y**2 != self.x**3 + a * x + b:
-    #         err_msg = f"({x}, {y}) is not on the curve"
-    #         raise ValueError(err_msg)
-    #
-    # def __eq__(self, other: object) -> bool:
-    #     """Eq."""
-    #     return self.x == other.x and self.y == other.y \
-    #         and self.a == other.a and self.b == other.b
-    #
-    # def __ne__(self, other: object) -> bool:
-    #     """Ne."""
-    #     # this should be the inverse of the == operator
-    #     return not (self == other)
-    #
+    def __ne__(self, other: object) -> bool:
+        """Ne."""
+        return not (self == other)
+
     # def __repr__(self) -> str:
     #     """Repr."""
     #     if self.x is None:
